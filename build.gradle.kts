@@ -1,5 +1,7 @@
 plugins {
     id("java")
+    kotlin("jvm") version "1.7.21" // Kotlin version to use
+    application // Application plugin. Also see 1️⃣ below the code
 }
 
 group = "org.kotlinspringboot"
@@ -16,4 +18,13 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { // Settings for `KotlinCompile` tasks
+    // Kotlin compiler options
+    kotlinOptions.jvmTarget = "1.8" // Target version of generated JVM bytecode
+}
+//TODO toggle removing this
+application {
+    mainClass.set("MainKt") // The main class of the application
 }
